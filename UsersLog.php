@@ -37,13 +37,14 @@
     },5000);
   });
 </script>
+<script src="https://kit.fontawesome.com/dee439f8c1.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <?php include'header.php'; ?> 
 <main>
   <section>
   <!--User table-->
-  <h1 class="slideInDown animated">Here are the Users daily logs</h1>
+  <h1 class="slideInDown animated"><i class="fa-solid fa-hospital-user"></i> Users Daily Logs</h1>
   	<div class="form-style-5 slideInDown animated">
   		<form method="POST" action="Export_Excel.php">
   			<input type="date" name="date_sel" id="date_sel">
