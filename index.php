@@ -25,7 +25,7 @@
           <th>Gender</th>
           <th>Finger ID</th>
           <th>Date</th>
-          <th>Time In</th>
+          <th>Enrolled at</th>
         </tr>
       </thead>
     </table>
@@ -54,7 +54,7 @@
                       <TD><?php echo $row['gender'];?></TD>
                       <TD><?php echo $row['fingerprint_id'];?></TD>
                       <TD><?php echo $row['user_date'];?></TD>
-                      <TD><?php echo $row['time_in'];?></TD>
+                      <TD><?php echo $row['enrolled_at'];?></TD>
                       </TR>
         <?php
                 }   

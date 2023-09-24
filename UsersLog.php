@@ -60,8 +60,7 @@
           <th>Serial Number</th>
           <th>Fingerprint ID</th>
           <th>Date</th>
-          <th>Time In</th>
-          <th>Time Out</th>
+          <th>Checked in at</th>
         </tr>
       </thead>
     </table>

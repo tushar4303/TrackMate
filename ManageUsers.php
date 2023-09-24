@@ -57,7 +57,7 @@
 			<legend><span class="number">3</span> Additional Info</legend>
 			<label>
 				Time In:
-				<input type="time" name="timein" id="timein">
+				<!-- <input type="time" name="timein" id="timein"> -->
 				<input type="radio" name="gender" class="gender" value="Female">Female
 	          	<input type="radio" name="gender" class="gender" value="Male" checked="checked">Male
 	      	</label >
@@ -79,7 +79,7 @@
 		          <th>Gender</th>
 		          <th>S.No</th>
 		          <th>Date</th>
-		          <th>Time in</th>
+		          <th>Enrolled at</th>
 		        </tr>
 		      </thead>
 		    </table>

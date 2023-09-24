@@ -66,7 +66,7 @@ if (isset($_POST['Add'])) {
     $Email= $_POST['email'];
 
     //optional
-    $Timein = $_POST['timein'];
+    $Timein = time();
     $Gender= $_POST['gender'];
 
     //check if there any selected user
@@ -203,7 +203,7 @@ if (isset($_POST['Update'])) {
     $Email= $_POST['email'];
 
     //optional
-    $Timein = $_POST['timein'];
+    $Timein = time();
     $Gender= $_POST['gender'];
 
     if ($Number == 0) {
