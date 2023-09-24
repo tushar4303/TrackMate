@@ -14,7 +14,7 @@ if(isset($_POST["To_Excel"])){
 
         $Log_date = $_POST['date_sel']; 
     }
-        $sql = "SELECT * FROM users_logs WHERE checkindate='$Log_date' ORDER BY id DESC";
+        $sql = "SELECT * FROM users_logs WHERE checkin_date='$Log_date' ORDER BY id DESC";
         $result = mysqli_query($conn, $sql);
         if($result->num_rows > 0){
             $output .= '
@@ -25,8 +25,7 @@ if(isset($_POST["To_Excel"])){
                             <TH>Serial Number</TH>
                             <TH>Fingerprint ID</TH>
                             <TH>Date log</TH>
-                            <TH>Time In</TH>
-                            <TH>Time Out</TH>
+                            <TH>Checked in at</TH>
                           </TR>';
               while($row=$result->fetch_assoc()) {
                   $output .= '
@@ -35,9 +34,8 @@ if(isset($_POST["To_Excel"])){
                                   <TD> '.$row['username'].'</TD>
                                   <TD> '.$row['serialnumber'].'</TD>
                                   <TD> '.$row['fingerprint_id'].'</TD>
-                                  <TD> '.$row['checkindate'].'</TD>
-                                  <TD> '.$row['timein'].'</TD>
-                                  <TD> '.$row['timeout'].'</TD>
+                                  <TD> '.$row['checkin_date'].'</TD>
+                                  <TD> '.$row['checkin_time'].'</TD>
                               </TR>';
               }
               $output .= '</table>';

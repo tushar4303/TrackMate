@@ -246,7 +246,7 @@ if (isset($_POST['Update'])) {
 
                             if (!empty($Uname) && !empty($Email) && !empty($Timein)) {
 
-                                $sql="UPDATE users SET username=?, serialnumber=?, gender=?, email=?, time_in=? WHERE fingerprint_select=1";
+                                $sql="UPDATE users SET username=?, serialnumber=?, gender=?, email=?, checkin_date=? WHERE fingerprint_select=1";
                                 $result = mysqli_stmt_init($conn);
                                 if (!mysqli_stmt_prepare($result, $sql)) {
                                     echo "SQL_Error_select_Fingerprint";

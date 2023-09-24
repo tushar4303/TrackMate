@@ -36,7 +36,7 @@ if (isset($_POST['FingerID'])) {
                     //Login
                     if (!$row = mysqli_fetch_assoc($resultl)){
 
-                    	$sql = "INSERT INTO users_logs (username, serialnumber, fingerprint_id, checkindate, timein, timeout) VALUES (? ,?, ?, CURDATE(), CURTIME(), ?)";
+                    	$sql = "INSERT INTO users_logs (username, serialnumber, fingerprint_id, checkin_date, checkin_time) VALUES (? ,?, ?, CURDATE(), CURTIME(), ?)";
                         $result = mysqli_stmt_init($conn);
                         if (!mysqli_stmt_prepare($result, $sql)) {
                             echo "SQL_Error_Select_login1";

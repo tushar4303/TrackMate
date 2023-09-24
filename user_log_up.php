@@ -22,7 +22,7 @@
           $seldate = $_SESSION['seldate'];
       }
 
-      $sql = "SELECT * FROM users_logs WHERE checkindate='$seldate' ORDER BY id DESC";
+      $sql = "SELECT * FROM users_logs WHERE checkin_date='$seldate' ORDER BY id DESC";
       $result = mysqli_stmt_init($conn);
       if (!mysqli_stmt_prepare($result, $sql)) {
           echo '<p class="error">SQL Error</p>';
@@ -38,9 +38,8 @@
                   <TD><?php echo $row['username'];?></TD>
                   <TD><?php echo $row['serialnumber'];?></TD>
                   <TD><?php echo $row['fingerprint_id'];?></TD>
-                  <TD><?php echo $row['checkindate'];?></TD>
-                  <TD><?php echo $row['timein'];?></TD>
-                  <TD><?php echo $row['timeout'];?></TD>
+                  <TD><?php echo $row['checkin_date'];?></TD>
+                  <TD><?php echo $row['checkin_time'];?></TD>
                   </TR>
     <?php
             }   

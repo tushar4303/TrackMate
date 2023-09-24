@@ -30,7 +30,7 @@
               <TD><?php echo $row['gender'];?></TD>
               <TD><?php echo $row['serialnumber'];?></TD>
               <TD><?php echo $row['user_date'];?></TD>
-              <TD><?php echo $row['time_in'];?></TD>
+              <TD><?php echo $row['enrolled_at'];?></TD>
               </TR>
 <?php
         }   
