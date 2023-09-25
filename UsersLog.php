@@ -39,29 +39,8 @@
             $("#userslog").html(data);
           });
         }, 5000);
-        $("#teacher").change(function () {
-          var selectedTeacher = $(this).val();
-          var subjectInput = $("#subject");
-          switch (selectedTeacher) {
-            case "Janhavi Ma'am":
-              subjectInput.val("IOE");
-              break;
-            case "Mrudul Ma'am":
-              subjectInput.val("MIS");
-              break;
-            case "Prasad Sir":
-              subjectInput.val("STQA");
-              break;
-            case "Sunantha Ma'am":
-              subjectInput.val("AIDS 2");
-              break;
-            case "Aruna Ma'am":
-              subjectInput.val("IRS");
-              break;
-            default:
-              subjectInput.val(""); // Clear the subject input if no teacher is selected
-              break;
-          }
+        $("#user_log").click(function () {
+          console.log("submit clickedddd");
         });
       });
     </script>
@@ -80,25 +59,33 @@
         <div class="form-style-5 slideInDown animated">
           <form method="POST" action="Export_Excel.php" class="cust_form">
             <input type="date" name="date_sel" id="date_sel" />
-            <button type="button" name="user_log" id="user_log">
+            <!-- <button type="button" name="user_log" id="user_log">
               Submit
-            </button>
-            <input type="submit" name="To_Excel" value="Export to Excel" />
+            </button> -->
+            <!-- <input type="submit" name="To_Excel" value="Export to Excel" /> -->
             <select name="teacher" id="teacher">
               <option value="">Select Teacher</option>
               <option value="Janhavi Ma'am">Janhavi Ma'am</option>
-              <option value="Mrudul Ma'am">Mrudul Ma'am</option>
+              <!-- <option value="Mrudul Ma'am">Mrudul Ma'am</option> -->
               <option value="Prasad Sir">Prasad Sir</option>
               <option value="Sunantha Ma'am">Sunantha Ma'am</option>
               <option value="Aruna Ma'am">Aruna Ma'am</option>
             </select>
-            <input
+            <!-- <input
               type="text"
               id="subject"
               name="subject"
               placeholder="Subject"
               disabled
-            />
+            /> -->
+            <select name="subject" id="subject">
+              <option value="">Select Subject</option>
+              <option value="1">IOE</option>
+              <option value="2">STQA</option>
+              <option value="3">AIDS 2</option>
+              <option value="4">IRS</option>
+              <!-- <option value="">Aruna Ma'am</option> -->
+            </select>
             <select name="timeslot" id="cars">
               <option value="">Select Lecture Time</option>
               <option value="">9:00 - 10:00</option>
@@ -109,7 +96,10 @@
               <option value="">15:00 - 16:00</option>
               <option value="">16:00 - 17:00</option>
             </select>
-            <input type="submit" value="Submit">
+            <!-- <input type="submit" value="Submit"> -->
+            <button type="button" name="user_log" id="user_log">
+              Submit
+            </button>
           </form>
           <div>
             <div class="tbl-header slideInRight animated">
@@ -134,10 +124,10 @@
           <table cellpadding="0" cellspacing="0" border="0">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Sr No.</th>
                 <th>Name</th>
-                <th>Serial Number</th>
-                <th>Fingerprint ID</th>
+                <th>Roll No.</th>
+                <!-- <th>Fingerprint ID</th> -->
                 <th>Date</th>
                 <th>Checked in at</th>
               </tr>
@@ -147,6 +137,13 @@
         <div class="tbl-content slideInRight animated">
           <div id="userslog"></div>
         </div>
+
+        <div class="form-style-5" style="margin-left: 87%;">
+          <form method="POST" action="Export_Excel.php" class="cust_form">
+            <input type="submit" name="To_Excel" value="Export to Excel" style="text-align: center;" />
+          </form>
+        </div>
+        
       </section>
     </main>
   </body>
