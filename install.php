@@ -21,6 +21,20 @@
     
 	$conn = new mysqli($servername, $username, $password, $dbname);
 
+	//subject master table 
+	$sql = "CREATE TABLE IF NOT EXISTS `subject` (
+		`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		`subject_name` varchar(100) NOT NULL,
+		`subject_teacher` varchar(100) NOT NULL,
+		`subject_id` int(20)
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+
+	if ($conn->query($sql) === TRUE) {
+		echo "Table users created successfully";
+	} else {
+		echo "Error creating table: " . $conn->error;
+	}
+
 	// sql to create table
 	$sql = "CREATE TABLE IF NOT EXISTS `users` (
 			`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -33,14 +47,33 @@
 			`user_date` date,
 			`enrolled_at` time,
 			`del_fingerid` tinyint(1) NOT NULL DEFAULT '0',
-			`add_fingerid` tinyint(1) NOT NULL DEFAULT '0'
+			`add_fingerid` tinyint(1) NOT NULL DEFAULT '0',
+			`subject_id` int(20)
 	) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+	// $sql = "CREATE TABLE IF NOT EXISTS `users` (
+	// 	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	// 	`username` varchar(100) NOT NULL,
+	// 	`serialnumber` double NOT NULL,
+	// 	`gender` varchar(10) NOT NULL,
+	// 	`email` varchar(50) NOT NULL,
+	// 	`fingerprint_id` int(11) NOT NULL,
+	// 	`fingerprint_select` tinyint(1) NOT NULL DEFAULT '0',
+	// 	`user_date` date,
+	// 	`enrolled_at` time,
+	// 	`del_fingerid` tinyint(1) NOT NULL DEFAULT '0',
+	// 	`add_fingerid` tinyint(1) NOT NULL DEFAULT '0',
+	// 	`subject_id` int(20),
+	// 	FOREIGN KEY (`subject_id`) REFERENCES `subject`(`id`)
+	// ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+	
 
 	if ($conn->query($sql) === TRUE) {
 	    echo "Table users created successfully";
 	} else {
 	    echo "Error creating table: " . $conn->error;
 	}
+	
+
 
 	$sql = "CREATE TABLE IF NOT EXISTS `users_logs` (
 			`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -48,7 +81,9 @@
 			`serialnumber` double NOT NULL,
 			`fingerprint_id` int(5) NOT NULL,
 			`checkin_date` date NOT NULL,
-			`checkin_time` time
+			`checkin_time` time,
+			`subject_id` int(20),
+			FOREIGN KEY (`subject_id`) REFERENCES `subject`(`id`) 
 	) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 
 	if ($conn->query($sql) === TRUE) {

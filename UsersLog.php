@@ -61,6 +61,7 @@
           <th>Fingerprint ID</th>
           <th>Date</th>
           <th>Checked in at</th>
+          <th>Subject</th>
         </tr>
       </thead>
     </table>

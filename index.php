@@ -26,6 +26,7 @@
           <th>Finger ID</th>
           <th>Date</th>
           <th>Enrolled at</th>
+          <!-- <th>Subject</th> -->
         </tr>
       </thead>
     </table>
