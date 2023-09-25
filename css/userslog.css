@@ -1,3 +1,4 @@
+
 .form-style-5{
   display: block;
 }
@@ -7,7 +8,10 @@
   align-items: center;
   margin: 1rem 0;
 }
-.form-style-5 input,button{
+.cust_form input,select{
+  display: block;
+}
+.form-style-5 input,button,select{
   margin-right: 1rem;
   padding: 1rem;
   background: rgba(0,0,0,0.1);

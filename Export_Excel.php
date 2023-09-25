@@ -26,6 +26,7 @@ if(isset($_POST["To_Excel"])){
                             <TH>Fingerprint ID</TH>
                             <TH>Date log</TH>
                             <TH>Checked in at</TH>
+                            
                           </TR>';
               while($row=$result->fetch_assoc()) {
                   $output .= '
