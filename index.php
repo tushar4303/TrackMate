@@ -9,13 +9,14 @@
     $('.tbl-header').css({'padding-right':scrollWidth});
 }).resize();
 </script>
+<script src="https://kit.fontawesome.com/dee439f8c1.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <?php include'header.php'; ?> 
 <main>
   <section>
   <!--User table-->
-  <h1 class="slideInDown animated">Here are all the Users</h1>
+  <h1 class="slideInDown animated"><i class="fa-solid fa-users"></i> All Users</h1>
   <div class="tbl-header slideInRight animated">
     <table cellpadding="0" cellspacing="0" border="0">
       <thead>
