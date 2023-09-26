@@ -20,6 +20,10 @@ if(isset($_POST["To_Excel"])){
             $output .= '
                         <table class="table" bordered="1">  
                           <TR>
+                            <TH>Jahanvi</TH>
+                            <TH>IOE  10:45</TH>
+                          </TR>
+                          <TR>
                             <TH>ID</TH>
                             <TH>Name</TH>
                             <TH>Serial Number</TH>
