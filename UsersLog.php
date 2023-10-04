@@ -39,9 +39,9 @@
             $("#userslog").html(data);
           });
         }, 5000);
-        $("#user_log").click(function () {
-          console.log("submit clickedddd");
-        });
+        // $("#user_log").click(function () {
+        //   console.log("submit clickedddd");
+        // });
       });
     </script>
     <script
@@ -57,49 +57,34 @@
           <i class="fa-solid fa-hospital-user"></i> Lecture Attendance Details
         </h1>
         <div class="form-style-5 slideInDown animated">
-          <form method="POST" action="Export_Excel.php" class="cust_form">
+          <form method="POST" action="subject_log.php" class="cust_form">
             <input type="date" name="date_sel" id="date_sel" />
-            <!-- <button type="button" name="user_log" id="user_log">
-              Submit
-            </button> -->
-            <!-- <input type="submit" name="To_Excel" value="Export to Excel" /> -->
-            <select name="teacher" id="teacher">
+            <select name="teacher_name" id="teacher_name">
               <option value="">Select Teacher</option>
               <option value="Janhavi Ma'am">Janhavi Ma'am</option>
-              <!-- <option value="Mrudul Ma'am">Mrudul Ma'am</option> -->
               <option value="Prasad Sir">Prasad Sir</option>
               <option value="Sunantha Ma'am">Sunantha Ma'am</option>
               <option value="Aruna Ma'am">Aruna Ma'am</option>
             </select>
-            <!-- <input
-              type="text"
-              id="subject"
-              name="subject"
-              placeholder="Subject"
-              disabled
-            /> -->
-            <select name="subject" id="subject">
+            <select name="subject_name" id="subject_name">
               <option value="">Select Subject</option>
-              <option value="1">IOE</option>
-              <option value="2">STQA</option>
-              <option value="3">AIDS 2</option>
-              <option value="4">IRS</option>
-              <!-- <option value="">Aruna Ma'am</option> -->
+              <option value="IOE">IOE</option>
+              <option value="STQA">STQA</option>
+              <option value="AIDS-II">AIDS-II</option>
+              <option value="IRS">IRS</option>
             </select>
-            <select name="timeslot" id="cars">
+            <select name="timeslot" id="timeslot">
               <option value="">Select Lecture Time</option>
-              <option value="">9:00 - 10:00</option>
-              <option value="">10:00 - 11:00</option>
-              <option value="">11:15 - 12:15</option>
-              <option value="">12:15 - 1:15</option>
-              <option value="">14:00 - 15:00</option>
-              <option value="">15:00 - 16:00</option>
-              <option value="">16:00 - 17:00</option>
+              <option value="9:00 - 10:00">9:00 - 10:00</option>
+              <option value="10:00 - 11:00">10:00 - 11:00</option>
+              <option value="11:15 - 12:15">11:15 - 12:15</option>
+              <option value="12:15 - 1:15">12:15 - 1:15</option>
+              <option value="14:00 - 15:00">14:00 - 15:00</option>
+              <option value="15:00 - 16:00">15:00 - 16:00</option>
+              <option value="16:00 - 17:00">16:00 - 17:00</option>
             </select>
-            <!-- <input type="submit" value="Submit"> -->
-            <button type="button" name="user_log" id="user_log">
-              Submit
-            </button>
+            <input type="submit" id="Submit_Sub_Log" name="Submit_Sub_Log" value="submit">
+            </input>
           </form>
           <div>
             <div class="tbl-header slideInRight animated">
@@ -115,7 +100,7 @@
               </table>
             </div>
             <div class="tbl-content slideInRight animated">
-              <div id=""></div>
+              <div id="subjectLog"></div>
             </div>
 
           </div>

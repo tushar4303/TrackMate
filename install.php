@@ -22,11 +22,12 @@
 	$conn = new mysqli($servername, $username, $password, $dbname);
 
 	//subject master table 
-	$sql = "CREATE TABLE IF NOT EXISTS `subject` (
+	$sql = "CREATE TABLE IF NOT EXISTS `teacher_details` (
 		`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		`subject_name` varchar(100) NOT NULL,
-		`subject_teacher` varchar(100) NOT NULL,
-		`subject_id` int(20)
+		`date_sel` date NOT NULL,
+		`subject_name` varchar(50) NOT NULL,
+		`subject_teacher` varchar(50) NOT NULL,
+		`subject_timeslot` varchar(50) NOT NULL
 	) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 
 	if ($conn->query($sql) === TRUE) {
@@ -81,9 +82,7 @@
 			`serialnumber` double NOT NULL,
 			`fingerprint_id` int(5) NOT NULL,
 			`checkin_date` date NOT NULL,
-			`checkin_time` time,
-			`subject_id` int(20),
-			FOREIGN KEY (`subject_id`) REFERENCES `subject`(`id`) 
+			`checkin_time` time
 	) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 
 	if ($conn->query($sql) === TRUE) {
