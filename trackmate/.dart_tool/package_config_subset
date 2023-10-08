@@ -146,10 +146,6 @@ xdg_directories
 2.19
 file:///C:/Users/padhy/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-1.0.3/
 file:///C:/Users/padhy/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-1.0.3/lib/
-trackmate
-3.0
-file:///C:/Users/padhy/OneDrive/Documents/trackmate/
-file:///C:/Users/padhy/OneDrive/Documents/trackmate/lib/
 sky_engine
 3.0
 file:///C:/flutter/flutter/bin/cache/pkg/sky_engine/
@@ -162,4 +158,8 @@ flutter_test
 3.0
 file:///C:/flutter/flutter/packages/flutter_test/
 file:///C:/flutter/flutter/packages/flutter_test/lib/
+trackmate
+3.0
+file:///C:/xampp/htdocs/Smart_Attendance_system_IOE/trackmate/
+file:///C:/xampp/htdocs/Smart_Attendance_system_IOE/trackmate/lib/
 2
