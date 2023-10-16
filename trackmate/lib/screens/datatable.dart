@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:lottie/lottie.dart';
 
 class FilterableDataTable extends StatefulWidget {
   @override
@@ -13,28 +16,45 @@ class _FilterableDataTableState extends State<FilterableDataTable> {
   String _selectedValueCol2 = 'All';
   String _selectedValueCol3 = 'All';
 
-  final List<String> _col1FilterOptions = ['All', 'Option 1', 'Option 2'];
-  final List<String> _col2FilterOptions = ['All', 'Option A', 'Option B'];
-  final List<String> _col3FilterOptions = ['All', 'Item X', 'Item Y'];
+  final List<String> _col1FilterOptions = [
+    'All',
+    'Janhavi Baikerikar',
+    'Prasad Padalkar',
+    "Mrudul ma'am"
+  ];
+  final List<String> _col2FilterOptions = ['All', 'IOE', 'MIS', 'STQA'];
+  final List<String> _col3FilterOptions = [
+    'All',
+    '09:00-10:00',
+    '10:00-11:00',
+    '11:15-12:15',
+    '12:15-01:15'
+  ];
 
   @override
   void initState() {
     super.initState();
-    // Generate your data rows here or load them from a data source.
-    _rows = [
-      DataRow(cells: [
-        DataCell(Text('Option 1')),
-        DataCell(Text('Option A')),
-        DataCell(Text('Item X'))
-      ]),
-      DataRow(cells: [
-        DataCell(Text('Option 2')),
-        DataCell(Text('Option B')),
-        DataCell(Text('Item Y'))
-      ]),
-      // Add more data rows as needed.
-    ];
-    _filteredRows = _rows;
+    // Fetch data from the API and populate _rows
+    fetchDataFromAPI();
+  }
+
+  Future<List<DataRow>> fetchDataFromAPI() async {
+    await Future.delayed(Duration(seconds: 2));
+    final response = await http.get(Uri.parse(
+        'https://gist.githubusercontent.com/tushar4303/7e79e4d1e06e7c6a122315524c64d8ee/raw/ca4a42ddbe5360cd52ecc73851166a5b41da6ae6/studentAttendance'));
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = json.decode(response.body);
+      return data.map((row) {
+        return DataRow(cells: [
+          DataCell(Text(row['name'])),
+          DataCell(Text(row['roll_no'].toString())),
+          DataCell(Text(row['branch'])),
+        ]);
+      }).toList();
+    } else {
+      throw Exception('Failed to fetch data');
+    }
   }
 
   void _filterData() {
@@ -64,16 +84,14 @@ class _FilterableDataTableState extends State<FilterableDataTable> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(32.0),
+            padding: const EdgeInsets.all(16.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 DropdownButton<String>(
                   value: _selectedValueCol1,
                   onChanged: (newValue) {
                     setState(() {
                       _selectedValueCol1 = newValue!;
-                      _filterData();
                     });
                   },
                   items: _col1FilterOptions.map((option) {
@@ -88,7 +106,6 @@ class _FilterableDataTableState extends State<FilterableDataTable> {
                   onChanged: (newValue) {
                     setState(() {
                       _selectedValueCol2 = newValue!;
-                      _filterData();
                     });
                   },
                   items: _col2FilterOptions.map((option) {
@@ -103,7 +120,6 @@ class _FilterableDataTableState extends State<FilterableDataTable> {
                   onChanged: (newValue) {
                     setState(() {
                       _selectedValueCol3 = newValue!;
-                      _filterData();
                     });
                   },
                   items: _col3FilterOptions.map((option) {
@@ -116,31 +132,31 @@ class _FilterableDataTableState extends State<FilterableDataTable> {
               ],
             ),
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: DataTable(
-              columns: [
-                DataColumn(
-                  label: Container(
-                    alignment: Alignment.center,
-                    child: Text('Column 1'),
+          FutureBuilder<List<DataRow>>(
+            future: fetchDataFromAPI(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: Lottie.asset('assets/animation_lnsgqs58.json'),
+                );
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text('Error: ${snapshot.error}'),
+                );
+              } else {
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    columns: [
+                      DataColumn(label: Text('Name')),
+                      DataColumn(label: Text('Roll No.')),
+                      DataColumn(label: Text('Branch')),
+                    ],
+                    rows: snapshot.data ?? [],
                   ),
-                ),
-                DataColumn(
-                  label: Container(
-                    alignment: Alignment.center,
-                    child: Text('Column 2'),
-                  ),
-                ),
-                DataColumn(
-                  label: Container(
-                    alignment: Alignment.center,
-                    child: Text('Column 3'),
-                  ),
-                ),
-              ],
-              rows: _filteredRows,
-            ),
+                );
+              }
+            },
           ),
         ],
       ),

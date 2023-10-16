@@ -19,7 +19,8 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="trackmate" >
+        android:label="trackmate"
+        android:networkSecurityConfig="@xml/network_security_config" >
         <activity
             android:name="com.example.trackmate.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

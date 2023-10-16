@@ -4,7 +4,7 @@
             "outputFile": "com.example.trackmate.app-mergeDebugResources-9:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\padhy\\OneDrive\\Documents\\trackmate\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\xampp\\htdocs\\Smart_Attendance_system_IOE\\trackmate\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

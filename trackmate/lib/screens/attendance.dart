@@ -8,17 +8,24 @@ class Attendance extends StatefulWidget {
 
 class _AttendanceState extends State<Attendance> {
   final formKey = GlobalKey<FormState>(); // key for form
-  String name = "";
-  String selectedSubject = "Select Subject"; // For the subject dropdown
+  String selectedName = "Select Name"; // For the name dropdown
+  String selectedSubject = "Select Subject"; // Initial value matches an item
   DateTime selectedDate = DateTime.now(); // For the date selector
   String selectedTimeSlot = "Select Time Slot"; // For the time slot dropdown
 
+  List<String> names = [
+    "Select Name",
+    "Prof. Janhavi Bairkerikar",
+    "Prof. Mrudul Arkadi",
+    "Prof. Prasad Padalkar",
+    // Add more name options here
+  ];
+
   List<String> subjects = [
     "Select Subject",
-    "Math",
-    "Science",
-    "History",
-    "English",
+    "IOE",
+    "STQA",
+    "MIS",
     // Add more subject options here
   ];
 
@@ -63,12 +70,37 @@ class _AttendanceState extends State<Attendance> {
                 SizedBox(
                   height: height * 0.035,
                 ),
-                TextFormField(
-                  decoration: InputDecoration(labelText: "Enter your name"),
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(labelText: "Select Name"),
+                  value: selectedName,
+                  items: names.map((String name) {
+                    return DropdownMenuItem<String>(
+                      value: name,
+                      child: Text(name),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedName = newValue!;
+                      // Add logic here to auto-select the subject based on the name
+                      if (selectedName == "Prof. Janhavi Bairkerikar") {
+                        selectedSubject =
+                            "IOE"; // Set the corresponding subject
+                      } else if (selectedName == "Prof. Mrudul Arkadi") {
+                        selectedSubject =
+                            "MIS"; // Set the corresponding subject
+                      } else if (selectedName == "Prof. Prasad Padalkar") {
+                        selectedSubject =
+                            "STQA"; // Set the corresponding subject
+                      } else {
+                        selectedSubject =
+                            "Select Subject"; // Reset subject if none matches
+                      }
+                    });
+                  },
                   validator: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-                      return "Enter correct name";
+                    if (value == "Select Name") {
+                      return "Please select a name";
                     } else {
                       return null;
                     }

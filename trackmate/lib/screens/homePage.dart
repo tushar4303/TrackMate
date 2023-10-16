@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:trackmate/screens/verify.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -9,17 +9,24 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final formKey = GlobalKey<FormState>(); // key for form
-  String name = "";
-  String selectedSubject = "Select Subject"; // For the subject dropdown
+  String selectedName = "Select Name"; // For the name dropdown
+  String selectedSubject = "Select Subject"; // Initial value matches an item
   DateTime selectedDate = DateTime.now(); // For the date selector
   String selectedTimeSlot = "Select Time Slot"; // For the time slot dropdown
 
+  List<String> names = [
+    "Select Name",
+    "Prof. Janhavi Bairkerikar",
+    "Prof. Mrudul Arkadi",
+    "Prof. Prasad Padalkar",
+    // Add more name options here
+  ];
+
   List<String> subjects = [
     "Select Subject",
-    "Math",
-    "Science",
-    "History",
-    "English",
+    "IOE",
+    "STQA",
+    "MIS",
     // Add more subject options here
   ];
 
@@ -34,11 +41,15 @@ class _HomeState extends State<Home> {
 
   // Stopwatch instance to record time
   final Stopwatch stopwatch = Stopwatch();
-  late Timer timer;
+  bool isAttendanceStarted = false; // Track whether attendance is started
+
+  late Timer timer; // Define the timer as a late variable
 
   @override
   void initState() {
     super.initState();
+    // Initialize the timer with a dummy value
+    timer = Timer(Duration(seconds: 0), () {});
     // Start a timer to update the UI every second
     timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
       setState(() {});
@@ -48,7 +59,9 @@ class _HomeState extends State<Home> {
   @override
   void dispose() {
     stopwatch.reset();
-    timer.cancel(); // Cancel the timer when disposing the widget
+    if (timer.isActive) {
+      timer.cancel(); // Cancel the timer when disposing the widget
+    }
     super.dispose();
   }
 
@@ -62,6 +75,27 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  value: 1,
+                  child: Text('Verify'),
+                ),
+              ];
+            },
+            onSelected: (value) {
+              if (value == 1) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Verify()),
+                );
+              }
+            },
+            icon: Icon(Icons.more_vert), // Three-dot icon
+          ),
+        ],
       ),
       backgroundColor: Color(0xFFffffff),
       body: SingleChildScrollView(
@@ -84,12 +118,37 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: height * 0.035,
                 ),
-                TextFormField(
-                  decoration: InputDecoration(labelText: "Enter your name"),
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(labelText: "Select Name"),
+                  value: selectedName,
+                  items: names.map((String name) {
+                    return DropdownMenuItem<String>(
+                      value: name,
+                      child: Text(name),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedName = newValue!;
+                      // Add logic here to auto-select the subject based on the name
+                      if (selectedName == "Prof. Janhavi Bairkerikar") {
+                        selectedSubject =
+                            "IOE"; // Set the corresponding subject
+                      } else if (selectedName == "Prof. Mrudul Arkadi") {
+                        selectedSubject =
+                            "MIS"; // Set the corresponding subject
+                      } else if (selectedName == "Prof. Prasad Padalkar") {
+                        selectedSubject =
+                            "STQA"; // Set the corresponding subject
+                      } else {
+                        selectedSubject =
+                            "Select Subject"; // Reset subject if none matches
+                      }
+                    });
+                  },
                   validator: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
-                      return "Enter correct name";
+                    if (value == "Select Name") {
+                      return "Please select a name";
                     } else {
                       return null;
                     }
@@ -186,21 +245,29 @@ class _HomeState extends State<Home> {
                   child: ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        if (stopwatch.isRunning) {
+                        if (isAttendanceStarted) {
                           stopwatch.stop();
                           stopwatch.reset();
+                          timer
+                              .cancel(); // Stop the timer when stopping attendance
                         } else {
                           stopwatch.start();
+                          timer =
+                              Timer.periodic(Duration(seconds: 1), (Timer t) {
+                            setState(() {});
+                          }); // Start the timer when starting attendance
                         }
+                        isAttendanceStarted =
+                            !isAttendanceStarted; // Toggle the state
                       });
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor:
-                          stopwatch.isRunning ? Colors.red : Colors.black,
+                          isAttendanceStarted ? Colors.red : Colors.black,
                     ),
                     child: Text(
-                      stopwatch.isRunning
+                      isAttendanceStarted
                           ? "Stop Attendance"
                           : "Start Attendance",
                       textScaleFactor: 1.15,
@@ -212,14 +279,16 @@ class _HomeState extends State<Home> {
                 ),
                 AnimatedSwitcher(
                   duration: Duration(milliseconds: 500),
-                  child: stopwatch.isRunning
+                  child: isAttendanceStarted
                       ? Column(
                           children: [
                             Center(
                               child: Text(
                                 "Time Elapsed: ${stopwatch.elapsed.inHours}:${(stopwatch.elapsed.inMinutes % 60).toString().padLeft(2, '0')}:${(stopwatch.elapsed.inSeconds % 60).toString().padLeft(2, '0')}",
                                 style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w500),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
                             SizedBox(
