@@ -2,7 +2,7 @@
 
 In the realm of modern education, efficient attendance management is pivotal. To address the shortcomings of traditional methods, we have developed a mobile application as an integral part of our Smart Attendance System. This app seamlessly connects with NodeMCU ESP8266 and the R305 Fingerprint Scanner, offering teachers and students a convenient and secure way to manage attendance wirelessly.
 
-![Apple iPhone 11 Pro Max Presentation (1)](https://github.com/tushar4303/TrackMate/assets/88235295/25e6f10b-14e1-457e-a9b5-74cb631a9b16)
+![Apple iPhone 11 Pro Max Presentation (2)](https://github.com/tushar4303/TrackMate/assets/88235295/a1650150-ce78-4d0a-862f-3e8be580434b)
 
 ## Table of Contents
 
